@@ -34,59 +34,57 @@
 
 ---
 
-## 🚀 快速上手
+## 🚀 快速上手 (AI Agent Skill 安装)
 
-### 1. 环境准备与安装
+本工具既可以作为独立开发工具使用，也已封装为标准的 **AI Agent Skill**。您可以直接将其导入支持 Skill 扩展的 AI 编码助手（如 Codex、Claude Code、Cursor、Gemini Antigravity 等）。
 
-请确保已安装 **Node.js** (v16+)。接着克隆仓库并安装依赖项：
+### 1. 安装到 AI 编码助手 (Codex / Claude Code / Antigravity)
+
+大多数支持 Skill/Plugin 扩展的 AI 应用都遵循文件夹扫描机制。您只需将此仓库克隆或复制到您项目的 Agent 技能目录中：
 
 ```bash
-# 克隆仓库
-git clone https://github.com/letitbe95/manual-designer.git
-cd manual-designer
+# 1. 进入您正在开发的画册项目/代码仓库根目录
+cd my-brochure-workspace
 
+# 2. 创建 Agent 技能存放目录（不同 AI 应用的技能目录可能有所不同，如 .agents/skills/ 或 .claudecode/skills/）
+mkdir -p .agents/skills/
+
+# 3. 将本仓库克隆至该技能目录
+git clone https://github.com/letitbe95/manual-designer.git .agents/skills/manual-designer
+```
+
+#### ⚙️ AI 助手如何识别与触发？
+1. **自动加载**：AI 编码助手在启动或扫描时，会自动读取并解析 `.agents/skills/manual-designer/SKILL.md` 里的系统指令和规范。
+2. **自然语言触发**：加载后，您只需在对话中用自然语言对 AI 助手下达任务，例如：
+   > *“帮我用 /manual-designer 设计一套高端产品手册”*
+   > *“帮我设计一个 42.61 × 29.11 cm 比例的科技感画册，并导出 PDF”*
+   AI 助手将自动获取此 Skill 的最高标准排版规范、目录结构及 PDF 编译流程，代替您完成繁琐的 CSS 排版和 Puppeteer 脚本编写。
+
+---
+
+### 2. 开发者手动使用流程 (Manual Developer Workflow)
+
+如果您希望脱离 AI 助手手动运行编译和导出流程，请执行以下命令：
+
+#### 安装依赖：
+```bash
+# 进入技能目录
+cd .agents/skills/manual-designer
 # 安装编译器依赖（Puppeteer & FS Extra）
 npm install
 ```
 
-### 2. 创建您的画册项目
-
-在项目根目录下直接按照序号创建文件夹。编译器将自动寻找以两位数字开头的目录（例如 `01_cover`、`02_intro_spread`）：
-
-```
-my-brochure/
-├── 01_cover/
-│   ├── copy.md               # 原始文案与企划
-│   └── page.html             # HTML 布局文件（封面右页或整页全幅面）
-├── 02_intro_spread/
-│   ├── copy.md
-│   └── page.html             # 左右对页排版
-├── 99_backcover/
-│   ├── copy.md
-│   └── page.html             # 封底左页排版
-├── assets/                   # 项目共享 Logo 和通用图片资源
-└── package.json              # 项目标题与主题自定义配置文件
-```
-
-### 3. 自动编译装配 (`npm run build`)
-
-将页面切片与文案碎片一键装配为统一的 HTML 网页画册：
-
+#### 编译装配画册网页：
 ```bash
 npm run build
 ```
+这会将画册合并编译为 `dist/index.html`。您只需用任意浏览器打开该文件，即可查看精美的毛玻璃屏幕预览器。
 
-这会将所有页面编译并合并到 `dist/index.html`。您只需用任意浏览器打开该文件，即可查看精美的毛玻璃屏幕预览器。
-
-### 4. 导出印刷级 PDF (`npm run export`)
-
-一键生成完全符合印刷尺寸的矢量 PDF 画册：
-
+#### 导出印刷级 PDF：
 ```bash
 npm run export
 ```
-
-Puppeteer 会自动运行 Chromium 实例，加载本地 `dist/index.html` 并自动打印生成不失真的 PDF：`dist/brochure.pdf`，其尺寸严格契合物理尺寸 **42.61cm × 29.11cm**。
+Puppeteer 会自动生成无边距的高保真 PDF：`dist/brochure.pdf`，尺寸严格契合 **42.61cm × 29.11cm**。
 
 ---
 

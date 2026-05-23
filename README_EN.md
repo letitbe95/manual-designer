@@ -34,59 +34,57 @@
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Quick Start (AI Agent Skill Installation)
 
-### 1. Prerequisites & Installation
+This tool can be used as a standalone compiler or integrated as a native **AI Agent Skill** into any AI coding assistants that support custom skills/plugins (such as Codex, Claude Code, Cursor, Gemini Antigravity, etc.).
 
-Ensure you have **Node.js** (v16+) installed. Then clone the repository and install dependencies:
+### 1. Installing to AI Coding Assistants (Codex / Claude Code / Antigravity)
+
+Most AI coding assistants that support skills or plugins scan your local workspace for an agent directory. You can easily clone this repository into your project's agent skill folder:
 
 ```bash
-# Clone the repository
-git clone https://github.com/<your-username>/manual-designer.git
-cd manual-designer
+# 1. Navigate to your project/brochure workspace directory
+cd my-brochure-workspace
 
-# Install compiler dependencies (Puppeteer & FS Extra)
+# 2. Create the agent skill directory (e.g., .agents/skills/ or .claudecode/skills/ depending on the assistant)
+mkdir -p .agents/skills/
+
+# 3. Clone this repository directly into the skill directory
+git clone https://github.com/letitbe95/manual-designer.git .agents/skills/manual-designer
+```
+
+#### ⚙️ How AI Agents Discover and Trigger this Skill
+1. **Auto Discovery**: Upon startup, the AI assistant scans and loads `.agents/skills/manual-designer/SKILL.md` to learn the layout specifications, folder structure, and build commands.
+2. **Natural Language Triggering**: Once loaded, simply ask the AI assistant in plain English/Chinese:
+   > *"Use /manual-designer to design a high-end product brochure for me"*
+   > *"Help me design a 42.61 × 29.11 cm high-tech manual and export it as PDF"*
+   The AI assistant will automatically enforce the precise typography layout, folder system, and Puppeteer export pipeline without you having to write any CSS or configuration scripts manually.
+
+---
+
+### 2. Manual Developer Workflow
+
+If you prefer to run the compilation and export processes manually without an AI assistant, execute these commands:
+
+#### Install Dependencies:
+```bash
+# Navigate to the skill folder
+cd .agents/skills/manual-designer
+# Install Puppeteer and other compiler dependencies
 npm install
 ```
 
-### 2. Creating a Brochure Project
-
-Create your brochure files directly under the project root. The compiler looks for directories prefixed with two digits (e.g. `01_cover`, `02_intro_spread`):
-
-```
-my-brochure/
-├── 01_cover/
-│   ├── copy.md               # Raw copy/content
-│   └── page.html             # HTML layout (right-page or full bleed cover)
-├── 02_intro_spread/
-│   ├── copy.md
-│   └── page.html             # Left-page and right-page spread layout
-├── 99_backcover/
-│   ├── copy.md
-│   └── page.html
-├── assets/                   # Shared logos and global images
-└── package.json              # Custom title and theme configurations
-```
-
-### 3. Assembly (`npm run build`)
-
-Compile the page sections into a single HTML previewer booklet:
-
+#### Compile Brochure:
 ```bash
 npm run build
 ```
+This compiles and packages your pages into a single `dist/index.html` file. You can open this file in any web browser to see a beautiful responsive preview.
 
-This compiles your sections and places them into `dist/index.html`. You can open this file in any web browser to see a beautiful responsive preview.
-
-### 4. PDF Generation (`npm run export`)
-
-Print a high-fidelity vector-scale PDF from your compiled brochure:
-
+#### Export High-Fidelity PDF:
 ```bash
 npm run export
 ```
-
-Puppeteer will spin up a headless Chromium instance, load `dist/index.html`, wait for all network assets to load, and output a print-ready PDF at `dist/brochure.pdf` matching the precise physical proportions of **42.61cm × 29.11cm**.
+Puppeteer will spin up a headless Chromium instance, load `dist/index.html`, and output a print-ready vector PDF at `dist/brochure.pdf` matching the precise physical proportions of **42.61cm × 29.11cm**.
 
 ---
 
