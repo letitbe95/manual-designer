@@ -1,12 +1,14 @@
 # 📖 Manual Designer | 画册与产品手册设计器
 
+**[简体中文](README.md) | [English](README_EN.md)**
+
 > 基于单页 HTML 架构的高端企业画册与产品手册设计工具，专为 **对页排版 (Facing Pages)** 网页预览与 **42.61 × 29.11 cm** 高保真 PDF 印刷标准而设计。
 
 ---
 
 ## ✨ 特性
 
-- **标准对页排版**：固定画布尺寸为 **42.61 × 29.11 cm**（宽 × 高），专为高端印刷设计进行优化。
+- **标准对页排版**：固定画布尺寸为 **42.61 × 29.11 cm**（宽 × 高），专为高端印刷设计进行优化。（需要其他尺寸可以自己修改prompt）
 - **电影级宽幅比例**：`1.4637` 的宽高比，在宽屏预览器和双页印刷中呈现绝佳视觉效果。
 - **自动编译打包**：瞬间将各个独立的页面资源（`page.html`、`copy.md`、本地图片）打包为单页优化的 Web 预览画册。
 - **无头浏览器 PDF 导出**：使用 Puppeteer 自动加载和生成无边距、完全保留背景打印的印刷级矢量 PDF。
@@ -55,72 +57,11 @@ git clone https://github.com/letitbe95/manual-designer.git .agents/skills/manual
 
 #### ⚙️ AI 助手如何识别与触发？
 1. **自动加载**：AI 编码助手在启动或扫描时，会自动读取并解析 `.agents/skills/manual-designer/SKILL.md` 里的系统指令和规范。
-2. **自然语言触发**：加载后，您只需在对话中用自然语言对 AI 助手下达任务，例如：
-   > *“帮我用 /manual-designer 设计一套高端产品手册”*
+2. **自然语言触发**：加载后，您只需准备好你的素材，并在对话中用自然语言对 AI 助手下达任务，例如：
+   > *“帮我用 /manual-designer 设计一套高端产品手册，<素材> ，<设计说明和文案>”*
    > *“帮我设计一个 42.61 × 29.11 cm 比例的科技感画册，并导出 PDF”*
    AI 助手将自动获取此 Skill 的最高标准排版规范、目录结构及 PDF 编译流程，代替您完成繁琐的 CSS 排版和 Puppeteer 脚本编写。
 
----
-
-### 2. 开发者手动使用流程 (Manual Developer Workflow)
-
-如果您希望脱离 AI 助手手动运行编译和导出流程，请执行以下命令：
-
-#### 安装依赖：
-```bash
-# 进入技能目录
-cd .agents/skills/manual-designer
-# 安装编译器依赖（Puppeteer & FS Extra）
-npm install
-```
-
-#### 编译装配画册网页：
-```bash
-npm run build
-```
-这会将画册合并编译为 `dist/index.html`。您只需用任意浏览器打开该文件，即可查看精美的毛玻璃屏幕预览器。
-
-#### 导出印刷级 PDF：
-```bash
-npm run export
-```
-Puppeteer 会自动生成无边距的高保真 PDF：`dist/brochure.pdf`，尺寸严格契合 **42.61cm × 29.11cm**。
-
----
-
-## 🎨 对页排版核心 CSS 蓝图
-
-每个页面的 `page.html` 必须严格遵循标准画布比例：
-
-```css
-:root {
-  --spread-width: 42.61cm;
-  --spread-height: 29.11cm;
-  --page-width: 21.305cm;
-  --page-height: 29.11cm;
-}
-
-/* 基础跨页对页容器 */
-.spread-container {
-  width: var(--spread-width);
-  height: var(--spread-height);
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  background-color: #ffffff;
-}
-
-/* 左右单页排版规范 */
-.left-page, .right-page {
-  width: var(--page-width);
-  height: var(--page-height);
-  position: relative;
-  overflow: hidden;
-  padding: 2.2cm 2.5cm; /* 预留高档艺术留白 */
-}
-```
-
----
 
 ## 📄 开源许可证
 
