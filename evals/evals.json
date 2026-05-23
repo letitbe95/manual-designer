@@ -1,0 +1,19 @@
+{
+  "skill_name": "manual-designer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a corporate product manual for 'Apex Robotics'. They have provided copy and details: \nTheme: Premium dark-mode minimalist high-tech. \nPrimary Color: #00f0ff (Neon Cyan). \nSecondary Color: #7000ff (Purple). \nSections:\n1. 01_cover: Title: 'Apex Vanguard X-1'. Subtitle: 'Autonomous Sentinel Systems'. Cover Image: vanguard_sentinel.jpg.\n2. 02_about_us: Left Page: 'The Sentinel Vanguard' (intro text). Right Page: Features Grid (Modular Chassis, Core Intelligence, Fusion Power).\n3. 03_product_specs: Left Page: Technical specifications table. Right Page: Performance analytics chart visualization (HTML SVG).\n4. 99_backcover: Contact details, logo, social icons.\n\nAll page files must be saved under the respective folders. Sizing strictly 42.61cm x 29.11cm. Ensure dynamic scaling so screen view does not distort. Finally, run the build script and export a pdf.",
+      "expected_output": "Standard brochure directory structure created with 01_cover, 02_about_us, 03_product_specs, 99_backcover. Fully compiled dist/index.html and dist/brochure.pdf are generated. Dimensions are strictly 42.61 × 29.11 cm. High-fidelity facing pages styling is implemented with no scaling distortion on screen.",
+      "files": [],
+      "expectations": [
+        "Directory layout includes '01_cover', '02_about_us', '03_product_specs', '99_backcover'",
+        "Consolidated single HTML file generated at 'dist/index.html'",
+        "PDF file printed at 'dist/brochure.pdf'",
+        "The CSS contains '@page { size: 42.61cm 29.11cm; }' and is exact in sizing",
+        "Screen media preview script scaling is implemented",
+        "Facing pages layout with left-page and right-page layout is designed beautifully"
+      ]
+    }
+  ]
+}

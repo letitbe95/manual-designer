@@ -1,0 +1,25 @@
+{
+  "name": "manual-designer",
+  "version": "1.0.0",
+  "description": "Design and build professional, premium company brochures or product manuals with Facing Pages layouts, compiled from HTML/CSS and exported to PDF via Puppeteer.",
+  "main": "templates/build.js",
+  "scripts": {
+    "build": "node templates/build.js",
+    "export": "node templates/export.js"
+  },
+  "keywords": [
+    "brochure",
+    "manual",
+    "facing-pages",
+    "pdf-generation",
+    "puppeteer",
+    "html-to-pdf",
+    "print-design"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "puppeteer": "^22.6.0"
+  }
+}
